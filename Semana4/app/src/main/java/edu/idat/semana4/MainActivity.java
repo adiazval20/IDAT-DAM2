@@ -1,6 +1,7 @@
 package edu.idat.semana4;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -47,47 +48,61 @@ public class MainActivity extends AppCompatActivity implements Comunicacion {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        cargarFragment(InicioFragment.class);
+                        cargarFragment(InicioFragment.class, position);
                         break;
                     case 1:
-                        cargarFragment(MapaFragment.class);
+                        cargarFragment(MapaFragment.class, position);
                         break;
                     case 2:
-                        cargarFragment(ConfiguracionFragment.class);
+                        cargarFragment(ConfiguracionFragment.class, position);
                         break;
                     case 3:
-                        cargarFragment(EfectosFragment.class);
+                        cargarFragment(EfectosFragment.class, position);
                         break;
                 }
             }
         });
 
-        cargarFragment(InicioFragment.class);
+        cargarFragment(InicioFragment.class, 0);
     }
 
-    private void cargarFragment(Class<?> claseFragment) {
+    private int actualFragmentPosition = 0;
+
+    private void cargarFragment(Class<?> claseFragment, int position) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
 
-        if (claseFragment == InicioFragment.class) {
-            InicioFragment inicioFragment = new InicioFragment();
-            transaction.replace(R.id.frmContenedor, inicioFragment);
 
-        } else if (claseFragment == MapaFragment.class) {
-            MapaFragment mapaFragment = new MapaFragment();
-            transaction.replace(R.id.frmContenedor, mapaFragment);
+        Fragment fragment = null;
+        boolean derecha = position > actualFragmentPosition;
 
-        } else if (claseFragment == ConfiguracionFragment.class) {
-            ConfiguracionFragment configuracionFragment = new ConfiguracionFragment();
-            transaction.replace(R.id.frmContenedor, configuracionFragment);
-
-        } else if (claseFragment == EfectosFragment.class) {
-            EfectosFragment efectosFragment = new EfectosFragment(this);
-            transaction.replace(R.id.frmContenedor, efectosFragment);
+        if (actualFragmentPosition != position) {
+            if (derecha) {
+                transaction.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
+            } else {
+                transaction.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
+            }
         }
 
-        transaction.commit();
+        if (claseFragment == InicioFragment.class) {
+            fragment = new InicioFragment();
+
+        } else if (claseFragment == MapaFragment.class) {
+            fragment = new MapaFragment();
+
+        } else if (claseFragment == ConfiguracionFragment.class) {
+            fragment = new ConfiguracionFragment();
+
+        } else if (claseFragment == EfectosFragment.class) {
+            fragment = new EfectosFragment(this);
+        }
+
+        if (fragment != null) {
+            transaction.replace(R.id.frmContenedor, fragment);
+            transaction.commit();
+            actualFragmentPosition = position;
+        }
+
     }
 
     @Override
