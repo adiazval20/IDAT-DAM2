@@ -1,4 +1,4 @@
-package edu.idat.semana6;
+package edu.idat.ec1;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,22 +14,18 @@ public class CustomView extends View {
     private int strokeWidth;
     private String strokeColor;
     private String fillColor;
-
-    public CustomView(Context context) {
-        super(context);
-        strokeWidth = 20;
-        strokeColor = "#DDDDDD";
-        fillColor = "#AAAAAA";
-    }
+    private int width;
+    private int height;
 
     public CustomView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CustomView, 0, 0);
+
         try {
-            strokeWidth = a.getInteger(R.styleable.CustomView_strokeWidth, 0);
-            strokeColor = a.getString(R.styleable.CustomView_strokeColor);
-            fillColor = a.getString(R.styleable.CustomView_fillColor);
+            strokeWidth = a.getInteger(R.styleable.CustomView_cStrokeWidth, 0);
+            strokeColor = a.getString(R.styleable.CustomView_cStrokeColor);
+            fillColor = a.getString(R.styleable.CustomView_cFillColor);
         } finally {
             a.recycle();
         }
@@ -37,18 +33,21 @@ public class CustomView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         Paint paint = new Paint();
         paint.setStrokeWidth(strokeWidth);
         paint.setColor(Color.parseColor(strokeColor));
         paint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(20, 350, 300, 750, paint);
+        canvas.drawRect(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2, height - strokeWidth / 2, paint);
 
-        paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.parseColor(fillColor));
-        canvas.drawRect(20, 350, 300, 750, paint);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(strokeWidth, strokeWidth, width - strokeWidth, height - strokeWidth, paint);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        width = MeasureSpec.getSize(widthMeasureSpec);
+        height = MeasureSpec.getSize(heightMeasureSpec);
     }
 }
-
-

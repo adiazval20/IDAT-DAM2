@@ -1,0 +1,2 @@
+rootProject.name='EC1'
+include ':app'

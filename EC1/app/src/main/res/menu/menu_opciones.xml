@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/optCarrito"
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="Carrito"
+        app:iconTint="@color/white"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/optAnim"
+        android:icon="@drawable/ic_fullscreen_exit_black_24dp"
+        android:title="Animaciones"
+        app:iconTint="@color/gray" />
+
+    <item
+        android:id="@+id/optSalir"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="Salir"
+        app:iconTint="@color/gray" />
+
+</menu>
