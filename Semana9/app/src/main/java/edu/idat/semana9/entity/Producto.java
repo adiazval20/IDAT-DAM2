@@ -1,6 +1,7 @@
 package edu.idat.semana9.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -10,14 +11,17 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private double precio;
+    private String imagenUrl;
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, double precio) {
+    @Ignore
+    public Producto(String nombre, String descripcion, double precio, String imagenUrl) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.imagenUrl = imagenUrl;
     }
 
     public long getId() {
@@ -50,5 +54,13 @@ public class Producto {
 
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
     }
 }
