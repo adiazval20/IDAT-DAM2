@@ -33,6 +33,7 @@ ext {
     roomVersion = '2.2.1'
     archLifecycleVersion = '2.2.0-beta01'
     picassoVersion = '2.71828'
+    stethoVersion = '1.5.1'
 }
 
 
