@@ -5,9 +5,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,7 @@ import edu.idat.semana9.viewmodel.MainViewModel;
 public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private ProductoAdapter adapter;
+    private FloatingActionButton fabAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Producto> productos) {
                 adapter.loadData(productos);
+            }
+        });
+
+        fabAgregar = findViewById(R.id.fabAgregar);
+        fabAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DataActivity.class));
             }
         });
     }
