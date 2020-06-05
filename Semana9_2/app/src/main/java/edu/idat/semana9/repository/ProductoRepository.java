@@ -36,7 +36,7 @@ public class ProductoRepository {
         });
     }
 
-    public LiveData<Optional<Producto>> find(int id) {
+    public LiveData<Optional<Producto>> find(long id) {
         return dao.find(id);
     }
 }

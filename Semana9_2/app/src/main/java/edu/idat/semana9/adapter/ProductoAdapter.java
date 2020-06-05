@@ -1,6 +1,7 @@
 package edu.idat.semana9.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,12 +19,17 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import edu.idat.semana9.Communication;
+import edu.idat.semana9.DataActivity;
 import edu.idat.semana9.R;
 import edu.idat.semana9.entity.Producto;
 
 public class ProductoAdapter extends ArrayAdapter<Producto> {
-    public ProductoAdapter(@NonNull Context context, int resource, @NonNull List<Producto> objects) {
+    private Communication communication;
+
+    public ProductoAdapter(@NonNull Context context, int resource, @NonNull List<Producto> objects, Communication communication) {
         super(context, resource, objects);
+        this.communication = communication;
     }
 
     @NonNull
@@ -33,7 +39,7 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_producto, parent, false);
         }
 
-        Producto producto = getItem(position);
+        final Producto producto = getItem(position);
 
         ImageView imgProducto = convertView.findViewById(R.id.imgProducto);
         TextView txtNombre = convertView.findViewById(R.id.txtNombre);
@@ -56,7 +62,9 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.optEditar:
-
+                                Intent intent = new Intent(getContext(), DataActivity.class);
+                                intent.putExtra("productoId", producto.getId());
+                                communication.loadActivity(intent);
                                 break;
                             case R.id.optEliminar:
                                 break;

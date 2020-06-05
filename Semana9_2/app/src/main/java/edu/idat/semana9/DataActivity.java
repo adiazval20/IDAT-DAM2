@@ -28,7 +28,7 @@ public class DataActivity extends AppCompatActivity {
         initControls();
 
         Bundle data = getIntent().getExtras();
-        int productoId = (data != null) ? data.getInt("productoId") : 0;
+        long productoId = (data != null) ? data.getLong("productoId") : 0;
 
         viewModel = new ViewModelProvider(this).get(DataViewModel.class);
         viewModel.findProducto(productoId).observe(this, new Observer<Optional<Producto>>() {

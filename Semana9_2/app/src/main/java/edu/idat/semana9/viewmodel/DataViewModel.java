@@ -19,7 +19,7 @@ public class DataViewModel extends AndroidViewModel {
         productoRepository = new ProductoRepository(application);
     }
 
-    public LiveData<Optional<Producto>> findProducto(int id) {
+    public LiveData<Optional<Producto>> findProducto(long id) {
         return productoRepository.find(id);
     }
 

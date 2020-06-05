@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements Communication {
         setContentView(R.layout.activity_main);
 
         ListView lstProductos = findViewById(R.id.lstProductos);
-        adapter = new ProductoAdapter(this, R.layout.item_producto, new ArrayList<Producto>());
+        adapter = new ProductoAdapter(this, R.layout.item_producto, new ArrayList<Producto>(), this);
         lstProductos.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);

@@ -18,7 +18,7 @@ public interface ProductoDao {
     LiveData<List<Producto>> list();
 
     @Query("SELECT * FROM Producto WHERE id = :id")
-    LiveData<Optional<Producto>> find(int id);
+    LiveData<Optional<Producto>> find(long id);
 
     @Insert
     long insert(Producto producto);
