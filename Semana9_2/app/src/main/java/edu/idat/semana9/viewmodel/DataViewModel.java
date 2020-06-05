@@ -20,7 +20,10 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public LiveData<Optional<Producto>> findProducto(int id) {
-        return null;
-//        return productoRepository.find(id);
+        return productoRepository.find(id);
+    }
+
+    public void save(Producto producto) {
+        productoRepository.save(producto);
     }
 }

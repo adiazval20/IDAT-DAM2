@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.Optional;
 
 import edu.idat.semana9.AppDatabase;
 import edu.idat.semana9.dao.ProductoDao;
@@ -33,5 +34,9 @@ public class ProductoRepository {
                 }
             }
         });
+    }
+
+    public LiveData<Optional<Producto>> find(int id) {
+        return dao.find(id);
     }
 }

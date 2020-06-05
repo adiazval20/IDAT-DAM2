@@ -8,6 +8,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.Optional;
 
 import edu.idat.semana9.entity.Producto;
 
@@ -17,7 +18,7 @@ public interface ProductoDao {
     LiveData<List<Producto>> list();
 
     @Query("SELECT * FROM Producto WHERE id = :id")
-    LiveData<Producto> find(int id);
+    LiveData<Optional<Producto>> find(int id);
 
     @Insert
     long insert(Producto producto);
