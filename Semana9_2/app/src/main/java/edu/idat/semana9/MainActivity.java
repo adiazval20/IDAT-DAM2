@@ -20,7 +20,7 @@ import edu.idat.semana9.adapter.ProductoAdapter;
 import edu.idat.semana9.entity.Producto;
 import edu.idat.semana9.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Communication {
     private MainViewModel viewModel;
     private ProductoAdapter adapter;
     private FloatingActionButton fabAgregar;
@@ -46,8 +46,13 @@ public class MainActivity extends AppCompatActivity {
         fabAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DataActivity.class));
+                loadActivity(new Intent(MainActivity.this, DataActivity.class));
             }
         });
+    }
+
+    @Override
+    public void loadActivity(Intent intent) {
+        startActivity(intent);
     }
 }

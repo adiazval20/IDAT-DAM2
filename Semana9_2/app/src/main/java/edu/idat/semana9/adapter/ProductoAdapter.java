@@ -2,6 +2,7 @@ package edu.idat.semana9.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.PopupMenu;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,6 +42,30 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         Picasso.get().load(producto.getImagenUrl()).into(imgProducto);
         txtNombre.setText(producto.getNombre());
         txtPrecio.setText(String.format("S/%.2f", producto.getPrecio()));
+
+        final TextView btnMenu = convertView.findViewById(R.id.btnMenu);
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(getContext(), btnMenu);
+                popup.getMenuInflater().inflate(R.menu.menu_producto, popup.getMenu());
+                popup.show();
+
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.optEditar:
+
+                                break;
+                            case R.id.optEliminar:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+            }
+        });
 
         return convertView;
     }
