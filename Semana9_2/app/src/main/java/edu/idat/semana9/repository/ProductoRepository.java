@@ -39,4 +39,13 @@ public class ProductoRepository {
     public LiveData<Optional<Producto>> find(long id) {
         return dao.find(id);
     }
+
+    public void delete(final Producto producto) {
+        AppDatabase.dbExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                dao.delete(producto);
+            }
+        });
+    }
 }

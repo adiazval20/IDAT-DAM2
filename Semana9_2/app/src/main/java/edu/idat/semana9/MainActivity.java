@@ -55,4 +55,9 @@ public class MainActivity extends AppCompatActivity implements Communication {
     public void loadActivity(Intent intent) {
         startActivity(intent);
     }
+
+    @Override
+    public void deleteItem(Producto producto) {
+        viewModel.deleteProducto(producto);
+    }
 }

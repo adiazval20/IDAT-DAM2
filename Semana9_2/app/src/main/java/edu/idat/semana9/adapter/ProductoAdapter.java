@@ -1,6 +1,7 @@
 package edu.idat.semana9.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 
 import com.squareup.picasso.Picasso;
@@ -67,6 +68,7 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
                                 communication.loadActivity(intent);
                                 break;
                             case R.id.optEliminar:
+                                showAlert(producto);
                                 break;
                         }
                         return false;
@@ -82,5 +84,29 @@ public class ProductoAdapter extends ArrayAdapter<Producto> {
         clear();
         addAll(productos);
         notifyDataSetChanged();
+    }
+
+    private void showAlert(final Producto producto) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Eliminar");
+        builder.setMessage("¿Realmente quieres realizar esta operación?");
+
+        builder.setPositiveButton("Proceder", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                communication.deleteItem(producto);
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

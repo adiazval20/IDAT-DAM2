@@ -22,4 +22,8 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<Producto>> listProductos() {
         return productoRepository.list();
     }
+
+    public void deleteProducto(Producto producto) {
+        productoRepository.delete(producto);
+    }
 }
