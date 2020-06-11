@@ -1,0 +1,4 @@
+private long id;
+private String nombre;
+private String estado;
+private boolean eliminado;
