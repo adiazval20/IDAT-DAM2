@@ -53,7 +53,7 @@ public class UsuarioService {
         errors = validate(usuario);
         errorsPersona = perServ.validate(persona);
 
-        if (/*errors.size() == 0 &&*/ errorsPersona.size() == 0) {
+        if (errors.size() == 0 && errorsPersona.size() == 0) {
             persona = perRepo.save(persona);
             usuario.setPersona(persona);
             usuario = repo.save(usuario);
