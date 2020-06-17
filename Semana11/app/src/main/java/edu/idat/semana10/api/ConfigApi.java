@@ -9,9 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ConfigApi {
     private static Retrofit retrofit;
+    private static UsuarioApi usuarioApi;
 
     static {
-        String baseUrl = "http://10.0.2.2:9090";
+        String baseUrl = "http://10.0.2.2:9090"; //IP DESDE EL EMULADOR
+//        String baseUrl = "http://192.168.1.109:9090"; //IP DESDE DISPOSITIVO MÓVIL - DEPENDE DE CADA PC
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -32,5 +34,12 @@ public class ConfigApi {
         builder.addNetworkInterceptor(stetho);
 
         return builder.build();
+    }
+
+    public static UsuarioApi getUsuarioApi() {
+        if (usuarioApi == null) {
+            usuarioApi = retrofit.create(UsuarioApi.class);
+        }
+        return usuarioApi;
     }
 }
