@@ -11,6 +11,6 @@ import retrofit2.http.POST;
 
 public interface UsuarioApi {
     @FormUrlEncoded
-    @POST("/api/usuario")
+    @POST("/api/usuario/auth")
     Call<CustomResponse> auth(@Field("username") String username, @Field("password") String password);
 }
