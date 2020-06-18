@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GenericExceptionHandler {
     @ExceptionHandler(Exception.class)
     public CustomResponse genericException(Exception ex) {
-        return new CustomResponse("exception", Global.OPERACION_ERRONEA, ex.getMessage());
+        return new CustomResponse("exception", -1, Global.OPERACION_ERRONEA, ex.getMessage());
     }
 }
