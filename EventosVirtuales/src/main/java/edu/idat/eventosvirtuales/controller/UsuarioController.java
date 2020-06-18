@@ -31,19 +31,18 @@ public class UsuarioController {
     @PostMapping("/auth")
     public CustomResponse auth(@RequestParam String username, @RequestParam String password) {
         if (service.findByCredenciales(username, password).isPresent()) {
-            return new CustomResponse("auth", 1, "Credenciales correctas", true);
+            return new CustomResponse("auth", "Credenciales correctas", true);
         } else {
-            return new CustomResponse("auth", -1, "Datos de ingreso incorrectos", false);
+            return new CustomResponse("auth", "Datos de ingreso incorrectos", false);
         }
     }
 
     @PostMapping("/persona")
     public CustomResponse createWithPersona(@RequestBody @Valid UsuarioPersonaDTO dto) {
         HashMap<String, Object> result = service.saveWidhPersona(dto);
-        int rpta = Integer.parseInt(result.get("rpta").toString());
-        String msg = rpta == 1
+        String msg = Integer.parseInt(result.get("rpta").toString()) == 1
                 ? OPERACION_CORRECTA
                 : OPERACION_INCORRECTA;
-        return new CustomResponse("result", rpta, msg, result.get("data"));
+        return new CustomResponse("result", msg, result.get("data"));
     }
 }

@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class SpecificExceptionHandler {
     @ExceptionHandler(JDBCException.class)
     public CustomResponse sqlException(JDBCException ex) {
-        return new CustomResponse("sql-exception", -1, Global.OPERACION_ERRONEA, ex.getMessage());
+        return new CustomResponse("sql-exception", Global.OPERACION_ERRONEA, ex.getMessage());
     }
 }
