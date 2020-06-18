@@ -10,13 +10,13 @@ import android.widget.Toast;
 import edu.idat.semana10.api.CustomResponse;
 import edu.idat.semana10.viewmodel.MainViewModel;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(CustomResponse customResponse) {
                 boolean result = (boolean) customResponse.getBody();
                 if (result) {
-                    Toast.makeText(MainActivity.this, "DATOS CORRECTOS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "DATOS CORRECTOS", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "DATOS INCORRECTOS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "DATOS INCORRECTOS", Toast.LENGTH_SHORT).show();
                 }
             }
         });

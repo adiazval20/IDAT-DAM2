@@ -33,7 +33,7 @@ public class UsuarioController {
         if (service.findByCredenciales(username, password).isPresent()) {
             return new CustomResponse("auth", 1, "Credenciales correctas", true);
         } else {
-            return new CustomResponse("auth", -1, "Datos de ingreso incorrectos", false);
+            return new CustomResponse("auth", 0, "Datos de ingreso incorrectos", false);
         }
     }
 
