@@ -2,14 +2,16 @@ package edu.idat.semana10.api;
 
 public class CustomResponse {
     private String type;
+    private int rpta;
     private String message;
     private Object body;
 
     public CustomResponse() {
     }
 
-    public CustomResponse(String type, String message, Object body) {
+    public CustomResponse(String type, int rpta, String message, Object body) {
         this.type = type;
+        this.rpta = rpta;
         this.message = message;
         this.body = body;
     }
@@ -20,6 +22,14 @@ public class CustomResponse {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getRpta() {
+        return rpta;
+    }
+
+    public void setRpta(int rpta) {
+        this.rpta = rpta;
     }
 
     public String getMessage() {
