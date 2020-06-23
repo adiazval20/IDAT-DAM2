@@ -5,14 +5,18 @@ import edu.idat.eventosvirtuales.entity.Persona;
 import edu.idat.eventosvirtuales.entity.Usuario;
 import edu.idat.eventosvirtuales.repository.PersonaRepository;
 import edu.idat.eventosvirtuales.repository.UsuarioRepository;
+import edu.idat.eventosvirtuales.utils.GenericResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Optional;
 
+import static edu.idat.eventosvirtuales.utils.Global.*;
+
 @Service
-public class UsuarioService {
+@Transactional
+public class UsuarioService implements BaseService<Usuario, Long> {
     private UsuarioRepository repo;
     private PersonaRepository perRepo;
     private PersonaService perServ;
@@ -23,18 +27,38 @@ public class UsuarioService {
         this.perServ = perServ;
     }
 
-    public Iterable<Usuario> list() {
-        return repo.findAll();
+    @Override
+    public GenericResponse list() {
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.list());
     }
 
-    public Optional<Usuario> find(long id) {
-        return repo.findById(id);
+    @Override
+    public GenericResponse find(Long id) {
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.findById(id));
     }
 
-    @Transactional
-    public HashMap<String, Object> saveWidhPersona(UsuarioPersonaDTO dto) {
-        HashMap<String, Object> result = new HashMap<>();
-        HashMap<String, String> errors, errorsPersona;
+    @Override
+    public GenericResponse save(Usuario obj) {
+        return null;
+    }
+
+    @Override
+    public GenericResponse delete(Long id) {
+        return null;
+    }
+
+    @Override
+    public HashMap<String, Object> validate(Usuario obj) {
+        HashMap errors = new HashMap();
+        if (repo.findByUsername(obj.getUsername()).isPresent()) {
+            errors.put("username", String.format("El nombre de usuario '%s' ya existe", obj.getUsername()));
+        }
+        return errors;
+    }
+
+    public GenericResponse saveWidhPersona(UsuarioPersonaDTO dto) {
+        GenericResponse response = new GenericResponse();
+        HashMap<String, Object> errors, errorsPersona;
 
         Usuario usuario = repo.findById(dto.getUsuarioId()).orElse(new Usuario());
         Persona persona = perRepo.findById(dto.getPersonaId()).orElse(new Persona());
@@ -57,29 +81,40 @@ public class UsuarioService {
             persona = perRepo.save(persona);
             usuario.setPersona(persona);
             usuario = repo.save(usuario);
-            result.put("rpta", 1);
-            result.put("data", usuario);
+
+            response.setRpta(RPTA_OK);
+            response.setMessage(OPERACION_CORRECTA);
+            response.setBody(usuario);
         } else {
             HashMap<String, Object> allErrors = new HashMap<>();
             allErrors.put("usuario", errors);
             allErrors.put("persona", errorsPersona);
-            result.put("rpta", 0);
-            result.put("data", allErrors);
+
+            response.setRpta(RPTA_WARNING);
+            response.setMessage(OPERACION_INCORRECTA);
+            response.setBody(allErrors);
         }
 
-        return result;
+        return response;
     }
 
-    public Optional<Usuario> findByCredenciales(String username, String password) {
-        return repo.findByCredenciales(username, password);
-    }
+    public GenericResponse findByCredenciales(String username, String password) {
+        GenericResponse response = new GenericResponse();
+        response.setType(TIPO_AUTH);
 
-    public HashMap<String, String> validate(Usuario usuario) {
-        HashMap errors = new HashMap();
-
-        if (repo.findByUsername(usuario.getUsername()).isPresent()) {
-            errors.put("username", String.format("El nombre de usuario '%s' ya existe", usuario.getUsername()));
+        Optional<Usuario> optUsuario = repo.findByCredenciales(username, password);
+        if (optUsuario.isPresent()) {
+            response.setRpta(RPTA_OK);
+            response.setMessage("Credenciales correctas");
+            response.setBody(true);
+        } else {
+            response.setRpta(RPTA_WARNING);
+            response.setMessage("Datos de ingreso incorrectos");
+            response.setBody(false);
         }
-        return errors;
+
+        return response;
     }
+
+
 }

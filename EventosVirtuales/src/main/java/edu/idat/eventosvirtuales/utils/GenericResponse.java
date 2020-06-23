@@ -1,26 +1,26 @@
 package edu.idat.eventosvirtuales.utils;
 
-public class CustomResponse {
+public class GenericResponse {
     private String type;
     private int rpta;
     private String message;
     private Object body;
 
-    public CustomResponse() {
-        type = "data";
+    public GenericResponse() {
+        type = "";
         rpta = 0;
-        message = "ok";
+        message = "";
         body = new Object();
     }
 
-    public CustomResponse(Object body) {
-        type = "data";
+    public GenericResponse(Object body) {
+        type = "";
         rpta = 0;
-        message = "ok";
+        message = "";
         this.body = body;
     }
 
-    public CustomResponse(String type, int rpta, String message, Object body) {
+    public GenericResponse(String type, int rpta, String message, Object body) {
         this.type = type;
         this.rpta = rpta;
         this.message = message;

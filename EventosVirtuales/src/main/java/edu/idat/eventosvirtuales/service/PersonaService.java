@@ -23,13 +23,11 @@ public class PersonaService {
         return repo.save(persona);
     }
 
-    public HashMap<String, String> validate(Persona persona) {
-        HashMap<String, String> errors = new HashMap<>();
-
+    public HashMap<String, Object> validate(Persona persona) {
+        HashMap<String, Object> errors = new HashMap<>();
         if (persona.getId() == 0 && repo.findByNroDocIdentidad(persona.getNroDocIdentidad()).isPresent()) {
             errors.put("nroDocIdentidad", String.format("Ya existe una persona con DNI '%s'", persona.getNroDocIdentidad()));
         }
-
         return errors;
     }
 }

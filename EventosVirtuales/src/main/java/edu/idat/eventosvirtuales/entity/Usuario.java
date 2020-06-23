@@ -1,18 +1,17 @@
 package edu.idat.eventosvirtuales.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotBlank
     @Column(length = 50, unique = true)
@@ -28,7 +27,6 @@ public class Usuario {
     @NotNull
     private boolean eliminado;
 
-    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Persona persona;
 
@@ -46,11 +44,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

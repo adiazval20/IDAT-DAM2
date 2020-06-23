@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotBlank
     @Column(length = 20, nullable = false)
@@ -38,7 +38,9 @@ public class Persona {
 
     private boolean eliminado;
 
-    @JsonBackReference
+    @OneToMany(mappedBy = "persona")
+    private List<InscripcionEventoVirtual> inscripcionEventoVirtuals;
+
     @OneToMany(mappedBy = "persona")
     private List<Usuario> usuarios;
 
@@ -52,6 +54,7 @@ public class Persona {
         this.estado = "A";
         this.eliminado = false;
         this.usuarios = new ArrayList<>();
+        this.inscripcionEventoVirtuals = new ArrayList<>();
     }
 
     public Persona(@NotBlank String nroDocIdentidad, @NotBlank String apellidoPaterno, @NotBlank String apellidoMaterno, @NotBlank String nombres, String fechaNacimiento) {
@@ -60,13 +63,17 @@ public class Persona {
         this.apellidoMaterno = apellidoMaterno;
         this.nombres = nombres;
         this.fechaNacimiento = fechaNacimiento;
+        this.estado = "A";
+        this.eliminado = false;
+        this.usuarios = new ArrayList<>();
+        this.inscripcionEventoVirtuals = new ArrayList<>();
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
