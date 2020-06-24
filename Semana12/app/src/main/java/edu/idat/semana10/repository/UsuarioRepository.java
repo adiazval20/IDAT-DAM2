@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import edu.idat.semana10.api.ConfigApi;
-import edu.idat.semana10.api.CustomResponse;
+import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.api.UsuarioApi;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,19 +25,19 @@ public class UsuarioRepository {
         api = ConfigApi.getUsuarioApi();
     }
 
-    public LiveData<CustomResponse> auth(String username, String password) {
-        final MutableLiveData<CustomResponse> data = new MutableLiveData<>();
+    public LiveData<GenericResponse> auth(String username, String password) {
+        final MutableLiveData<GenericResponse> data = new MutableLiveData<>();
 
-        api.auth(username, password).enqueue(new Callback<CustomResponse>() {
+        api.auth(username, password).enqueue(new Callback<GenericResponse>() {
             @Override
-            public void onResponse(Call<CustomResponse> call, Response<CustomResponse> response) {
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<CustomResponse> call, Throwable t) {
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
                 data.setValue(null);
             }
         });

@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import edu.idat.semana10.api.CustomResponse;
+import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.repository.UsuarioRepository;
 
 public class MainViewModel extends AndroidViewModel {
@@ -17,7 +17,7 @@ public class MainViewModel extends AndroidViewModel {
         usuarioRepository = UsuarioRepository.getInstance();
     }
 
-    public LiveData<CustomResponse> auth(String username, String password) {
+    public LiveData<GenericResponse> auth(String username, String password) {
         return usuarioRepository.auth(username, password);
     }
 }

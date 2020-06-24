@@ -1,15 +1,15 @@
 package edu.idat.semana10.api;
 
-public class CustomResponse {
+public class GenericResponse {
     private String type;
     private int rpta;
     private String message;
     private Object body;
 
-    public CustomResponse() {
+    public GenericResponse() {
     }
 
-    public CustomResponse(String type, int rpta, String message, Object body) {
+    public GenericResponse(String type, int rpta, String message, Object body) {
         this.type = type;
         this.rpta = rpta;
         this.message = message;

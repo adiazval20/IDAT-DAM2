@@ -2,7 +2,6 @@ package edu.idat.semana10;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,7 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import edu.idat.semana10.api.CustomResponse;
+import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.viewmodel.MainViewModel;
 
 public class LoginActivity extends AppCompatActivity implements LoginCommunication {
@@ -49,16 +48,16 @@ public class LoginActivity extends AppCompatActivity implements LoginCommunicati
 
     @Override
     public void login(String username, String password, ProgressBar progressBar) {
-        viewModel.auth(username, password).observe(this, new Observer<CustomResponse>() {
+        viewModel.auth(username, password).observe(this, new Observer<GenericResponse>() {
             @Override
-            public void onChanged(CustomResponse customResponse) {
+            public void onChanged(GenericResponse genericResponse) {
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                if (customResponse.getRpta() == 1) {
+                if (genericResponse.getRpta() == 1) {
                     loadActivity(new Intent(getBaseContext(), HomeActivity.class));
                 } else {
                     Toast.makeText(LoginActivity.this, "NO SE PUDO ACCEDER", Toast.LENGTH_SHORT).show();
