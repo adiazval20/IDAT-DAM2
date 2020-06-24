@@ -7,10 +7,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.dto.UsuarioPersonaDTO;
@@ -20,6 +23,7 @@ public class SignupActivity extends AppCompatActivity {
     private SignupViewModel viewModel;
     private Button btnCancel, btnSave;
     private EditText edtNroDocIdentidad, edtApellidoPaterno, edtApellidoMaterno, edtNombres, dtpFechaNacimiento, edtUsername, edtPassword;
+    private ProgressBar pgbSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class SignupActivity extends AppCompatActivity {
 
         btnCancel = findViewById(R.id.btnCancel);
         btnSave = findViewById(R.id.btnSave);
+
+        pgbSignup = findViewById(R.id.pgbSignup);
     }
 
     private void initListeners() {
@@ -70,7 +76,11 @@ public class SignupActivity extends AppCompatActivity {
                 viewModel.register(dto).observe((LifecycleOwner) context, new Observer<GenericResponse>() {
                     @Override
                     public void onChanged(GenericResponse genericResponse) {
-
+                        if (genericResponse.getRpta() == 1) {
+                            startActivity(new Intent(context, HomeActivity.class));
+                        } else {
+                            Toast.makeText(context, "No se pudo realizar la operación", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
             }
