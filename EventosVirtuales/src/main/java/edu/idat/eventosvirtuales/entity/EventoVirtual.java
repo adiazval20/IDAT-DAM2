@@ -28,11 +28,11 @@ public class EventoVirtual {
     @NotNull(message = "Debe ingresar una fecha de inicio")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+//    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date fechaHoraInicio;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+//    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date fechaHoraFin;
 
     @NotBlank(message = "Debe indicar una URL")

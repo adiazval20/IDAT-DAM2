@@ -1,4 +1,4 @@
-package edu.idat.eventosvirtuales.utils;
+package edu.idat.semana10.api;
 
 public class GenericResponse {
     private String type;
@@ -7,17 +7,6 @@ public class GenericResponse {
     private Object body;
 
     public GenericResponse() {
-        type = "";
-        rpta = 0;
-        message = "";
-        body = new Object();
-    }
-
-    public GenericResponse(String bodyType, Object body) {
-        type = "";
-        rpta = 0;
-        message = "";
-        this.body = body;
     }
 
     public GenericResponse(String type, int rpta, String message, Object body) {
