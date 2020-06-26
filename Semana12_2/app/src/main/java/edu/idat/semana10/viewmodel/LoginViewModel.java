@@ -9,10 +9,10 @@ import androidx.lifecycle.LiveData;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.repository.UsuarioRepository;
 
-public class MainViewModel extends AndroidViewModel {
+public class LoginViewModel extends AndroidViewModel {
     private UsuarioRepository usuarioRepository;
 
-    public MainViewModel(@NonNull Application application) {
+    public LoginViewModel(@NonNull Application application) {
         super(application);
         usuarioRepository = UsuarioRepository.getInstance();
     }

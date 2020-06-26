@@ -1,15 +1,15 @@
 package edu.idat.semana10.api;
 
-public class GenericResponse {
+public class GenericResponse<T> {
     private String type;
     private int rpta;
     private String message;
-    private Object body;
+    private T body;
 
     public GenericResponse() {
     }
 
-    public GenericResponse(String type, int rpta, String message, Object body) {
+    public GenericResponse(String type, int rpta, String message, T body) {
         this.type = type;
         this.rpta = rpta;
         this.message = message;
@@ -40,11 +40,11 @@ public class GenericResponse {
         this.message = message;
     }
 
-    public Object getBody() {
+    public T getBody() {
         return body;
     }
 
-    public void setBody(Object body) {
+    public void setBody(T body) {
         this.body = body;
     }
 }

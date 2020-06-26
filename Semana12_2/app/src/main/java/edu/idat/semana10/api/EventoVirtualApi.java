@@ -1,15 +1,17 @@
 package edu.idat.semana10.api;
 
-import androidx.lifecycle.LiveData;
+import java.util.ArrayList;
 
+import edu.idat.semana10.entity.EventoVirtual;
+import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface EventoVirtualApi {
     String path = "/api/evento-virtual/";
 
     @GET(path + "proximos")
-    LiveData<GenericResponse> listProximos();
+    Call<GenericResponse<ArrayList<EventoVirtual>>> listProximos();
 
     @GET(path + "pasados")
-    LiveData<GenericResponse> listPasados();
+    Call<GenericResponse<ArrayList<EventoVirtual>>> listPasados();
 }
