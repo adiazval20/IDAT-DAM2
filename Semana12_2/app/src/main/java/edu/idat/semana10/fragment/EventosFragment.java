@@ -16,12 +16,15 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import edu.idat.semana10.R;
+import edu.idat.semana10.adapter.EventoVirtualAdapter;
+import edu.idat.semana10.api.EventoVirtualApi;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.entity.EventoVirtual;
 import edu.idat.semana10.viewmodel.HomeViewModel;
 
 public class EventosFragment extends Fragment {
     private HomeViewModel viewModel;
+    private EventoVirtualAdapter adapter;
 
     public EventosFragment() {
     }
@@ -36,13 +39,15 @@ public class EventosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         AppCompatActivity context = (AppCompatActivity) getContext();
+        adapter = new EventoVirtualAdapter(context, R.layout.item_evento_virtual, new ArrayList<>());
 
         viewModel = new ViewModelProvider(context).get(HomeViewModel.class);
 
         viewModel.listProximos().observe(context, new Observer<GenericResponse<ArrayList<EventoVirtual>>>() {
             @Override
             public void onChanged(GenericResponse<ArrayList<EventoVirtual>> response) {
-                int asd = 0;
+                ArrayList<EventoVirtual> eventoVirtuals = response.getBody();
+                adapter.loadData(eventoVirtuals);
             }
         });
     }
