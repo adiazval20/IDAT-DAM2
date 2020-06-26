@@ -8,10 +8,12 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface UsuarioApi {
+    String path = "/api/usuario/";
+
     @FormUrlEncoded
-    @POST("/api/usuario/auth")
+    @POST(path + "auth")
     Call<GenericResponse> auth(@Field("username") String username, @Field("password") String password);
 
-    @POST("/api/usuario/persona")
+    @POST(path + "persona")
     Call<GenericResponse> register(@Body UsuarioPersonaDTO dto);
 }

@@ -1,7 +1,6 @@
-package edu.idat.semana10;
+package edu.idat.semana10.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -15,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import edu.idat.semana10.R;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.dto.UsuarioPersonaDTO;
 import edu.idat.semana10.viewmodel.SignupViewModel;

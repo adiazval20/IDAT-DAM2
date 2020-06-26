@@ -1,4 +1,4 @@
-package edu.idat.semana10;
+package edu.idat.semana10.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import edu.idat.semana10.R;
+import edu.idat.semana10.activity.LoginCommunication;
+import edu.idat.semana10.activity.SignupActivity;
+import edu.idat.semana10.fragment.AccessFragment;
 
 public class LoginFragment extends Fragment {
     private LoginCommunication communication;

@@ -1,4 +1,4 @@
-package edu.idat.semana10;
+package edu.idat.semana10.fragment;
 
 import android.os.Bundle;
 
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import edu.idat.semana10.R;
+import edu.idat.semana10.activity.LoginCommunication;
 
 public class AccessFragment extends Fragment {
     private LoginCommunication communication;

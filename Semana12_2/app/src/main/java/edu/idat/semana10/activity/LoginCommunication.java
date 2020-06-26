@@ -1,4 +1,4 @@
-package edu.idat.semana10;
+package edu.idat.semana10.activity;
 
 import android.content.Intent;
 import android.widget.ProgressBar;

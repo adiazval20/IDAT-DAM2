@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ConfigApi {
     private static Retrofit retrofit;
     private static UsuarioApi usuarioApi;
+    private static EventoVirtualApi eventoVirtualApi;
 
     static {
         String baseUrl = "http://10.0.2.2:9090"; //IP DESDE EL EMULADOR
@@ -41,5 +42,12 @@ public class ConfigApi {
             usuarioApi = retrofit.create(UsuarioApi.class);
         }
         return usuarioApi;
+    }
+
+    public static EventoVirtualApi getEventoVirtualApi() {
+        if (eventoVirtualApi == null) {
+            eventoVirtualApi = retrofit.create(EventoVirtualApi.class);
+        }
+        return eventoVirtualApi;
     }
 }

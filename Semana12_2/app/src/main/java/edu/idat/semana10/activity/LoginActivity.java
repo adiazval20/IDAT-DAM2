@@ -1,4 +1,4 @@
-package edu.idat.semana10;
+package edu.idat.semana10.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import edu.idat.semana10.fragment.LoginFragment;
+import edu.idat.semana10.R;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.viewmodel.MainViewModel;
 
