@@ -19,7 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f188513-c90f-4fc8-b687-96578ec459cb" name="Default Changelist" comment="" />
+    <list default="true" id="1f188513-c90f-4fc8-b687-96578ec459cb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Semana13_2/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Semana13_2/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Semana13_2/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semana13_2/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/adapter/EventoVirtualAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/adapter/EventoVirtualAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/res/layout/item_evento_virtual.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/res/layout/item_evento_virtual.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
