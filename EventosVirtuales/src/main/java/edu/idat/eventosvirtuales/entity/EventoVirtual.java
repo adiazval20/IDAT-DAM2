@@ -21,18 +21,12 @@ public class EventoVirtual {
     @Column(nullable = false)
     private String nombre;
 
-    @NotBlank(message = "Debe ingresar un ponente")
-    @Column(nullable = false)
-    private String ponente;
-
     @NotNull(message = "Debe ingresar una fecha de inicio")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-//    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date fechaHoraInicio;
 
     @Temporal(TemporalType.TIMESTAMP)
-//    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private Date fechaHoraFin;
 
     @NotBlank(message = "Debe indicar una URL")
@@ -45,29 +39,31 @@ public class EventoVirtual {
 
     private boolean eliminado;
 
+    @ManyToOne(optional = false)
+    private Persona ponente;
+
     @OneToMany(mappedBy = "eventoVirtual")
     private List<InscripcionEventoVirtual> inscripcionEventoVirtuals;
 
     public EventoVirtual() {
         this.id = 0L;
         this.nombre = "";
-        this.ponente = "";
         this.fechaHoraInicio = new Date();
-        this.fechaHoraFin = new Date();
         this.url = "";
         this.estado = "A";
+        this.ponente = new Persona();
         this.eliminado = false;
     }
 
-    public EventoVirtual(@NotBlank(message = "Dege ingresar un nombre") String nombre, @NotBlank(message = "Debe ingresar un ponente") String ponente, @NotNull(message = "Debe ingresar una fecha de inicio") Date fechaHoraInicio, Date fechaHoraFin, @NotBlank(message = "Debe indicar una URL") String url) {
+    public EventoVirtual(@NotBlank(message = "Dege ingresar un nombre") String nombre, Persona ponente, @NotNull(message = "Debe ingresar una fecha de inicio") Date fechaHoraInicio, Date fechaHoraFin, @NotBlank(message = "Debe indicar una URL") String url) {
         this.id = 0L;
         this.nombre = nombre;
-        this.ponente = ponente;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
         this.url = url;
         this.estado = "A";
         this.eliminado = false;
+        this.ponente = ponente;
     }
 
     public long getId() {
@@ -86,11 +82,11 @@ public class EventoVirtual {
         this.nombre = nombre;
     }
 
-    public String getPonente() {
+    public Persona getPonente() {
         return ponente;
     }
 
-    public void setPonente(String ponente) {
+    public void setPonente(Persona ponente) {
         this.ponente = ponente;
     }
 

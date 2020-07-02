@@ -41,6 +41,9 @@ public class Persona {
     @OneToMany(mappedBy = "persona")
     private List<InscripcionEventoVirtual> inscripcionEventoVirtuals;
 
+    @OneToMany(mappedBy = "ponente")
+    private List<EventoVirtual> eventoVirtuals;
+
     @OneToMany(mappedBy = "persona")
     private List<Usuario> usuarios;
 
@@ -55,6 +58,7 @@ public class Persona {
         this.eliminado = false;
         this.usuarios = new ArrayList<>();
         this.inscripcionEventoVirtuals = new ArrayList<>();
+        this.eventoVirtuals = new ArrayList<>();
     }
 
     public Persona(@NotBlank String nroDocIdentidad, @NotBlank String apellidoPaterno, @NotBlank String apellidoMaterno, @NotBlank String nombres, String fechaNacimiento) {
@@ -67,6 +71,7 @@ public class Persona {
         this.eliminado = false;
         this.usuarios = new ArrayList<>();
         this.inscripcionEventoVirtuals = new ArrayList<>();
+        this.eventoVirtuals = new ArrayList<>();
     }
 
     public long getId() {
@@ -139,5 +144,21 @@ public class Persona {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public List<InscripcionEventoVirtual> getInscripcionEventoVirtuals() {
+        return inscripcionEventoVirtuals;
+    }
+
+    public void setInscripcionEventoVirtuals(List<InscripcionEventoVirtual> inscripcionEventoVirtuals) {
+        this.inscripcionEventoVirtuals = inscripcionEventoVirtuals;
+    }
+
+    public List<EventoVirtual> getEventoVirtuals() {
+        return eventoVirtuals;
+    }
+
+    public void setEventoVirtuals(List<EventoVirtual> eventoVirtuals) {
+        this.eventoVirtuals = eventoVirtuals;
     }
 }

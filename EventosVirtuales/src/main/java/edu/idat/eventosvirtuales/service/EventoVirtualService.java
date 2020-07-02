@@ -1,37 +1,42 @@
 package edu.idat.eventosvirtuales.service;
 
+import edu.idat.eventosvirtuales.dto.EventoVirtualDTO;
 import edu.idat.eventosvirtuales.entity.EventoVirtual;
+import edu.idat.eventosvirtuales.entity.Persona;
 import edu.idat.eventosvirtuales.repository.EventoVirtualRepository;
 import edu.idat.eventosvirtuales.utils.GenericResponse;
 import org.aspectj.weaver.ResolvedPointcutDefinition;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import static edu.idat.eventosvirtuales.utils.Global.*;
 
 @Service
-@Transactional
 public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
     private EventoVirtualRepository repo;
+    private PersonaService perServ;
 
-    public EventoVirtualService(EventoVirtualRepository repo) {
+    public EventoVirtualService(EventoVirtualRepository repo, PersonaService perServ) {
         this.repo = repo;
+        this.perServ = perServ;
     }
 
     @Override
     public GenericResponse list() {
-        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, repo.list());
+        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.list()));
     }
 
     public GenericResponse listProximos() {
-        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.listProximos(new Date()));
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.listProximos(new Date())));
     }
 
     public GenericResponse listPasados() {
-        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.listPasados(new Date()));
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.listPasados(new Date())));
     }
 
     @Override
@@ -42,17 +47,31 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
     @Override
     public GenericResponse save(EventoVirtual obj) {
         GenericResponse response = new GenericResponse();
+        HashMap<String, Object> errors, ponenteErrors, allErrors;
+
         response.setType(TIPO_DATA);
 
-        HashMap<String, Object> errors = validate(obj);
-        if (errors.size() == 0) {
+        Persona ponente = perServ.find(obj.getPonente().getId()).orElse(obj.getPonente());
+
+        errors = validate(obj);
+        ponenteErrors = perServ.validate(obj.getPonente());
+
+        if (errors.size() == 0 && ponenteErrors.size() == 0) {
+            ponente = perServ.save(ponente);
+            obj.setPonente(ponente);
             obj = repo.save(obj);
+
             response.setRpta(RPTA_OK);
             response.setMessage(OPERACION_CORRECTA);
             response.setBody(obj);
         } else {
             response.setRpta(RPTA_WARNING);
             response.setMessage(OPERACION_INCORRECTA);
+
+            allErrors = new HashMap<>();
+            allErrors.put("EventoVirtual", errors);
+            allErrors.put("Ponente", ponenteErrors);
+            response.setBody(allErrors);
         }
 
         return response;
@@ -67,5 +86,26 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
     public HashMap<String, Object> validate(EventoVirtual obj) {
         HashMap<String, Object> errors = new HashMap<>();
         return errors;
+    }
+
+    private ArrayList<EventoVirtualDTO> loadDto(Iterable<EventoVirtual> eventoVirtuals) {
+        ArrayList<EventoVirtualDTO> data = new ArrayList<>();
+
+        for (EventoVirtual eve : eventoVirtuals) {
+            Persona ponente = eve.getPonente();
+
+            EventoVirtualDTO dto = new EventoVirtualDTO();
+            dto.setNombre(eve.getNombre());
+            dto.setFechaHoraInicio(eve.getFechaHoraInicio());
+            dto.setFechaHoraFin(eve.getFechaHoraFin());
+            dto.setUrl(eve.getUrl());
+            dto.setNroDocIdentidad(ponente.getNroDocIdentidad());
+            dto.setApellidoPaterno(ponente.getApellidoPaterno());
+            dto.setNombres(ponente.getNombres());
+
+            data.add(dto);
+        }
+
+        return data;
     }
 }

@@ -11,12 +11,12 @@ public interface EventoVirtualRepository extends CrudRepository<EventoVirtual, L
     Iterable<EventoVirtual> list();
 
     @Query("SELECT ev FROM EventoVirtual ev " +
-            "WHERE ev.fechaHoraFin >= :fechaHora AND ev.estado = 'A' AND ev.eliminado = false " +
+            "WHERE ev.fechaHoraInicio >= :fechaHora AND ev.estado = 'A' AND ev.eliminado = false " +
             "ORDER BY ev.fechaHoraInicio")
     Iterable<EventoVirtual> listProximos(Date fechaHora);
 
     @Query("SELECT ev FROM EventoVirtual ev " +
-            "WHERE ev.fechaHoraFin < :fechaHora AND ev.estado = 'A' AND ev.eliminado = false " +
+            "WHERE ev.fechaHoraInicio < :fechaHora AND ev.estado = 'A' AND ev.eliminado = false " +
             "ORDER BY ev.fechaHoraInicio DESC")
     Iterable<EventoVirtual> listPasados(Date fechaHora);
 }
