@@ -101,6 +101,7 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
             dto.setUrl(eve.getUrl());
             dto.setNroDocIdentidad(ponente.getNroDocIdentidad());
             dto.setApellidoPaterno(ponente.getApellidoPaterno());
+            dto.setApellidoMaterno(ponente.getApellidoMaterno());
             dto.setNombres(ponente.getNombres());
 
             data.add(dto);

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import edu.idat.semana10.api.ConfigApi;
 import edu.idat.semana10.api.EventoVirtualApi;
 import edu.idat.semana10.api.GenericResponse;
+import edu.idat.semana10.dto.EventoVirtualDTO;
 import edu.idat.semana10.entity.EventoVirtual;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,19 +29,19 @@ public class EventoVirtualRepository {
         api = ConfigApi.getEventoVirtualApi();
     }
 
-    public LiveData<GenericResponse<ArrayList<EventoVirtual>>> listProximos() {
-        MutableLiveData<GenericResponse<ArrayList<EventoVirtual>>> data = new MutableLiveData<>();
+    public LiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> listProximos() {
+        MutableLiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> data = new MutableLiveData<>();
 
-        api.listProximos().enqueue(new Callback<GenericResponse<ArrayList<EventoVirtual>>>() {
+        api.listProximos().enqueue(new Callback<GenericResponse<ArrayList<EventoVirtualDTO>>>() {
             @Override
-            public void onResponse(Call<GenericResponse<ArrayList<EventoVirtual>>> call, Response<GenericResponse<ArrayList<EventoVirtual>>> response) {
+            public void onResponse(Call<GenericResponse<ArrayList<EventoVirtualDTO>>> call, Response<GenericResponse<ArrayList<EventoVirtualDTO>>> response) {
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<GenericResponse<ArrayList<EventoVirtual>>> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<ArrayList<EventoVirtualDTO>>> call, Throwable t) {
                 data.setValue(null);
             }
         });

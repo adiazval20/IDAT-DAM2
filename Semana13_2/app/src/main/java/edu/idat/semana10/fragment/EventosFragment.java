@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -19,12 +20,14 @@ import edu.idat.semana10.R;
 import edu.idat.semana10.adapter.EventoVirtualAdapter;
 import edu.idat.semana10.api.EventoVirtualApi;
 import edu.idat.semana10.api.GenericResponse;
+import edu.idat.semana10.dto.EventoVirtualDTO;
 import edu.idat.semana10.entity.EventoVirtual;
 import edu.idat.semana10.viewmodel.HomeViewModel;
 
 public class EventosFragment extends Fragment {
     private HomeViewModel viewModel;
     private EventoVirtualAdapter adapter;
+    private ListView lsvEventos;
 
     public EventosFragment() {
     }
@@ -41,12 +44,15 @@ public class EventosFragment extends Fragment {
         AppCompatActivity context = (AppCompatActivity) getContext();
         adapter = new EventoVirtualAdapter(context, R.layout.item_evento_virtual, new ArrayList<>());
 
+        lsvEventos = view.findViewById(R.id.lsvEventos);
+        lsvEventos.setAdapter(adapter);
+
         viewModel = new ViewModelProvider(context).get(HomeViewModel.class);
 
-        viewModel.listProximos().observe(context, new Observer<GenericResponse<ArrayList<EventoVirtual>>>() {
+        viewModel.listProximos().observe(context, new Observer<GenericResponse<ArrayList<EventoVirtualDTO>>>() {
             @Override
-            public void onChanged(GenericResponse<ArrayList<EventoVirtual>> response) {
-                ArrayList<EventoVirtual> eventoVirtuals = response.getBody();
+            public void onChanged(GenericResponse<ArrayList<EventoVirtualDTO>> response) {
+                ArrayList<EventoVirtualDTO> eventoVirtuals = response.getBody();
                 adapter.loadData(eventoVirtuals);
             }
         });

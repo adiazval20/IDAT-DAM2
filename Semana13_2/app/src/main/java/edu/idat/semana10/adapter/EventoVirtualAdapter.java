@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +38,26 @@ public class EventoVirtualAdapter extends ArrayAdapter<EventoVirtualDTO> {
         EventoVirtualDTO dto = getItem(position);
 
         txtNombre = convertView.findViewById(R.id.txtNombre);
+        txtPonente = convertView.findViewById(R.id.txtPonente);
+        txtHorario = convertView.findViewById(R.id.txtHorario);
+        btnInformacion = convertView.findViewById(R.id.btnInformacion);
 
+        txtNombre.setText(dto.getNombre());
+        txtPonente.setText(dto.getNombrePonente());
 
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+        String horario = String.format("Horario: %s", df.format(dto.getFechaHoraInicio()));
+        if (dto.getFechaHoraFin() != null) {
+            horario += String.format(" - %s", df.format(dto.getFechaHoraFin()));
+        }
+        txtHorario.setText(horario);
+
+        btnInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return convertView;
     }

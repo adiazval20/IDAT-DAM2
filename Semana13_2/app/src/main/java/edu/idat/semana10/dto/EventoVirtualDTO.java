@@ -96,4 +96,8 @@ public class EventoVirtualDTO {
     public void setNombres(String nombres) {
         this.nombres = nombres;
     }
+
+    public String getNombrePonente() {
+        return String.format("%s %s %s", apellidoPaterno, apellidoMaterno, nombres);
+    }
 }
