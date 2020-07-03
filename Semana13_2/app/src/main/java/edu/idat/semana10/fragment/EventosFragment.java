@@ -17,6 +17,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import edu.idat.semana10.R;
+import edu.idat.semana10.activity.HomeCommunication;
 import edu.idat.semana10.adapter.EventoVirtualAdapter;
 import edu.idat.semana10.api.EventoVirtualApi;
 import edu.idat.semana10.api.GenericResponse;
@@ -28,8 +29,13 @@ public class EventosFragment extends Fragment {
     private HomeViewModel viewModel;
     private EventoVirtualAdapter adapter;
     private ListView lsvEventos;
+    private HomeCommunication communication;
 
     public EventosFragment() {
+    }
+
+    public EventosFragment(HomeCommunication communication) {
+        this.communication = communication;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class EventosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         AppCompatActivity context = (AppCompatActivity) getContext();
-        adapter = new EventoVirtualAdapter(context, R.layout.item_evento_virtual, new ArrayList<>());
+        adapter = new EventoVirtualAdapter(context, R.layout.item_evento_virtual, new ArrayList<>(), communication);
 
         lsvEventos = view.findViewById(R.id.lsvEventos);
         lsvEventos.setAdapter(adapter);

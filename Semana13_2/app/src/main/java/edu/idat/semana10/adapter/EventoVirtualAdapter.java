@@ -1,6 +1,7 @@
 package edu.idat.semana10.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +17,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.idat.semana10.activity.EventoActivity;
 import edu.idat.semana10.R;
+import edu.idat.semana10.activity.HomeCommunication;
 import edu.idat.semana10.dto.EventoVirtualDTO;
-import edu.idat.semana10.entity.EventoVirtual;
 
 public class EventoVirtualAdapter extends ArrayAdapter<EventoVirtualDTO> {
     private TextView txtNombre, txtPonente, txtHorario;
     private Button btnInformacion;
+    private HomeCommunication communication;
 
-    public EventoVirtualAdapter(@NonNull Context context, int resource, @NonNull List<EventoVirtualDTO> objects) {
+    public EventoVirtualAdapter(@NonNull Context context, int resource, @NonNull List<EventoVirtualDTO> objects, HomeCommunication communication) {
         super(context, resource, objects);
+        this.communication = communication;
     }
 
     @NonNull
@@ -55,7 +59,9 @@ public class EventoVirtualAdapter extends ArrayAdapter<EventoVirtualDTO> {
         btnInformacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), EventoActivity.class);
+                intent.putExtra("id", dto.getEventoVirtualId());
+                communication.loadActivity(intent);
             }
         });
 

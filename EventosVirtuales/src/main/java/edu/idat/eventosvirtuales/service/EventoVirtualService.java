@@ -95,10 +95,12 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
             Persona ponente = eve.getPonente();
 
             EventoVirtualDTO dto = new EventoVirtualDTO();
+            dto.setEventoVirtualId(eve.getId());
             dto.setNombre(eve.getNombre());
             dto.setFechaHoraInicio(eve.getFechaHoraInicio());
             dto.setFechaHoraFin(eve.getFechaHoraFin());
             dto.setUrl(eve.getUrl());
+            dto.setPonenteId(ponente.getId());
             dto.setNroDocIdentidad(ponente.getNroDocIdentidad());
             dto.setApellidoPaterno(ponente.getApellidoPaterno());
             dto.setApellidoMaterno(ponente.getApellidoMaterno());
