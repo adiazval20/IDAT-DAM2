@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -16,7 +17,7 @@ import edu.idat.semana10.fragment.EventosFragment;
 import edu.idat.semana10.fragment.InicioFragment;
 import edu.idat.semana10.fragment.PerfilFragment;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HomeCommunication {
     private BottomNavigationView bnvMenu;
 
     @Override
@@ -60,5 +61,10 @@ public class HomeActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.commit();
+    }
+
+    @Override
+    public void loadActivity(Intent intent) {
+        startActivity(intent);
     }
 }

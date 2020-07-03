@@ -19,17 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1f188513-c90f-4fc8-b687-96578ec459cb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/idat/eventosvirtuales/service/EventoVirtualService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/idat/eventosvirtuales/service/EventoVirtualService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/adapter/EventoVirtualAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/adapter/EventoVirtualAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/api/EventoVirtualApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/api/EventoVirtualApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/dto/EventoVirtualDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/dto/EventoVirtualDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/fragment/EventosFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/fragment/EventosFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/repository/EventoVirtualRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/repository/EventoVirtualRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/viewmodel/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/java/edu/idat/semana10/viewmodel/HomeViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Semana13_2/app/src/main/res/layout/fragment_eventos.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Semana13_2/app/src/main/res/layout/fragment_eventos.xml" afterDir="false" />
-    </list>
+    <list default="true" id="1f188513-c90f-4fc8-b687-96578ec459cb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,22 +99,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1593726308160" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593734982695">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1593735124817">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593734982695" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593734982695">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593735124817" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1593735124817">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593734982695" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593734982695">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593735124817" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1593735124816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593734982695" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593734982695">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593735124816" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1593735124817">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593734982695" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593735124817" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1593724659285">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -149,5 +139,16 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593725715933" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/edu/idat/eventosvirtuales/service/EventoVirtualService.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
