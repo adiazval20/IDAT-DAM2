@@ -5,14 +5,11 @@ import edu.idat.eventosvirtuales.entity.EventoVirtual;
 import edu.idat.eventosvirtuales.entity.Persona;
 import edu.idat.eventosvirtuales.repository.EventoVirtualRepository;
 import edu.idat.eventosvirtuales.utils.GenericResponse;
-import org.aspectj.weaver.ResolvedPointcutDefinition;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import static edu.idat.eventosvirtuales.utils.Global.*;
 
@@ -28,20 +25,20 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
 
     @Override
     public GenericResponse list() {
-        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.list()));
+        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, loadListDto(repo.list()));
     }
 
     public GenericResponse listProximos() {
-        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.listProximos(new Date())));
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadListDto(repo.listProximos(new Date())));
     }
 
     public GenericResponse listPasados() {
-        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.listPasados(new Date())));
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, loadListDto(repo.listPasados(new Date())));
     }
 
     @Override
     public GenericResponse find(Long id) {
-        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, repo.findById(id));
+        return new GenericResponse(TIPO_RESULT, RPTA_OK, OPERACION_CORRECTA, loadDto(repo.findById(id).orElse(new EventoVirtual())));
     }
 
     @Override
@@ -88,27 +85,32 @@ public class EventoVirtualService implements BaseService<EventoVirtual, Long> {
         return errors;
     }
 
-    private ArrayList<EventoVirtualDTO> loadDto(Iterable<EventoVirtual> eventoVirtuals) {
+    private ArrayList<EventoVirtualDTO> loadListDto(Iterable<EventoVirtual> eventoVirtuals) {
         ArrayList<EventoVirtualDTO> data = new ArrayList<>();
 
         for (EventoVirtual eve : eventoVirtuals) {
-            Persona ponente = eve.getPonente();
-
-            EventoVirtualDTO dto = new EventoVirtualDTO();
-            dto.setEventoVirtualId(eve.getId());
-            dto.setNombre(eve.getNombre());
-            dto.setFechaHoraInicio(eve.getFechaHoraInicio());
-            dto.setFechaHoraFin(eve.getFechaHoraFin());
-            dto.setUrl(eve.getUrl());
-            dto.setPonenteId(ponente.getId());
-            dto.setNroDocIdentidad(ponente.getNroDocIdentidad());
-            dto.setApellidoPaterno(ponente.getApellidoPaterno());
-            dto.setApellidoMaterno(ponente.getApellidoMaterno());
-            dto.setNombres(ponente.getNombres());
-
+            EventoVirtualDTO dto = loadDto(eve);
             data.add(dto);
         }
 
         return data;
+    }
+
+    private EventoVirtualDTO loadDto(EventoVirtual eve) {
+        Persona ponente = eve.getPonente();
+
+        EventoVirtualDTO dto = new EventoVirtualDTO();
+        dto.setEventoVirtualId(eve.getId());
+        dto.setNombre(eve.getNombre());
+        dto.setFechaHoraInicio(eve.getFechaHoraInicio());
+        dto.setFechaHoraFin(eve.getFechaHoraFin());
+        dto.setUrl(eve.getUrl());
+        dto.setPonenteId(ponente.getId());
+        dto.setNroDocIdentidad(ponente.getNroDocIdentidad());
+        dto.setApellidoPaterno(ponente.getApellidoPaterno());
+        dto.setApellidoMaterno(ponente.getApellidoMaterno());
+        dto.setNombres(ponente.getNombres());
+
+        return dto;
     }
 }

@@ -34,7 +34,7 @@ public class EventoVirtualController implements BaseController<EventoVirtual, Lo
 
     @Override
     @GetMapping("/{id}")
-    public GenericResponse find(Long id) {
+    public GenericResponse find(@PathVariable Long id) {
         return service.find(id);
     }
 
