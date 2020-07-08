@@ -1,5 +1,6 @@
 package edu.idat.eventosvirtuales.controller;
 
+import edu.idat.eventosvirtuales.dto.InscripcionEventoVirtualDTO;
 import edu.idat.eventosvirtuales.entity.InscripcionEventoVirtual;
 import edu.idat.eventosvirtuales.service.InscripcionEventoVirtualService;
 import edu.idat.eventosvirtuales.utils.GenericResponse;
@@ -29,9 +30,13 @@ public class InscripcionEventoVirtualController implements BaseController<Inscri
     }
 
     @Override
-    @PostMapping
     public GenericResponse save(@Valid @RequestBody InscripcionEventoVirtual obj) {
         return service.save(obj);
+    }
+
+    @PostMapping
+    public GenericResponse save(@RequestBody InscripcionEventoVirtualDTO dto) {
+        return service.save(dto);
     }
 
     @Override

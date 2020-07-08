@@ -1,5 +1,6 @@
 package edu.idat.eventosvirtuales.service;
 
+import edu.idat.eventosvirtuales.dto.InscripcionEventoVirtualDTO;
 import edu.idat.eventosvirtuales.entity.EventoVirtual;
 import edu.idat.eventosvirtuales.entity.InscripcionEventoVirtual;
 import edu.idat.eventosvirtuales.entity.Persona;
@@ -43,6 +44,18 @@ public class InscripcionEventoVirtualService implements BaseService<InscripcionE
         obj.setPersona(persona);
         
         return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.save(obj));
+    }
+
+    public GenericResponse save(InscripcionEventoVirtualDTO dto) {
+        InscripcionEventoVirtual iev = repo.findByEventoPersona(dto.getEventoVirtualId(), dto.getPersonaId()).orElse(new InscripcionEventoVirtual());
+        if (iev.getId() == 0) {
+            EventoVirtual eventoVirtual = eveVirtRepo.findById(dto.getEventoVirtualId()).orElse(new EventoVirtual());
+            Persona persona = perRepo.findById(dto.getPersonaId()).orElse(new Persona());
+            iev.setEventoVirtual(eventoVirtual);
+            iev.setPersona(persona);
+        }
+        iev.setRequiereCertificado(dto.isRequiereCertificado());
+        return new GenericResponse(TIPO_DATA, RPTA_OK, OPERACION_CORRECTA, repo.save(iev));
     }
 
     @Override
