@@ -18,5 +18,5 @@ public interface EventoVirtualApi {
     Call<GenericResponse<ArrayList<EventoVirtualDTO>>> listPasados();
 
     @GET(path + "{id}")
-    Call<GenericResponse<EventoVirtualDTO>> find(@Path("id") int id);
+    Call<GenericResponse<EventoVirtualDTO>> find(@Path("id") long id);
 }

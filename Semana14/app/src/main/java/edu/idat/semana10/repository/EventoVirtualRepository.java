@@ -49,10 +49,22 @@ public class EventoVirtualRepository {
         return data;
     }
 
-    public LiveData<GenericResponse<EventoVirtualDTO>> find(int id) {
+    public LiveData<GenericResponse<EventoVirtualDTO>> find(long id) {
         MutableLiveData<GenericResponse<EventoVirtualDTO>> data = new MutableLiveData<>();
 
-//        api.find(id).enqueue();
+        api.find(id).enqueue(new Callback<GenericResponse<EventoVirtualDTO>>() {
+            @Override
+            public void onResponse(Call<GenericResponse<EventoVirtualDTO>> call, Response<GenericResponse<EventoVirtualDTO>> response) {
+                if (response.isSuccessful()) {
+                    data.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse<EventoVirtualDTO>> call, Throwable t) {
+                data.setValue(null);
+            }
+        });
 
         return data;
     }
