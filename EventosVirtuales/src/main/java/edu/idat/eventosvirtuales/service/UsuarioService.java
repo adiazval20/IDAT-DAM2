@@ -6,11 +6,18 @@ import edu.idat.eventosvirtuales.entity.Usuario;
 import edu.idat.eventosvirtuales.repository.PersonaRepository;
 import edu.idat.eventosvirtuales.repository.UsuarioRepository;
 import edu.idat.eventosvirtuales.utils.GenericResponse;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static edu.idat.eventosvirtuales.utils.Global.*;
 
@@ -107,7 +114,14 @@ public class UsuarioService implements BaseService<Usuario, Long> {
         if (optUsuario.isPresent()) {
             response.setRpta(RPTA_OK);
             response.setMessage("Credenciales correctas");
-            response.setBody(true);
+
+            // Genero el token
+            String token = getToken(username);
+            HashMap<String, Object> body = new HashMap<>();
+            body.put("token", token);
+            body.put("usuarioId", optUsuario.get().getId());
+            body.put("personaId", optUsuario.get().getPersona().getId());
+            response.setBody(body);
         } else {
             response.setRpta(RPTA_WARNING);
             response.setMessage("Datos de ingreso incorrectos");
@@ -117,5 +131,20 @@ public class UsuarioService implements BaseService<Usuario, Long> {
         return response;
     }
 
+    private String getToken(String username) {
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList("ROLE_USER");
 
+        return Jwts
+                .builder()
+                .setId("jwt")
+                .setSubject(username)
+                .claim("authorities", grantedAuthorities
+                        .stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 600000))
+                .signWith(SignatureAlgorithm.HS512, AUTH_SECRET.getBytes()).compact();
+    }
 }
