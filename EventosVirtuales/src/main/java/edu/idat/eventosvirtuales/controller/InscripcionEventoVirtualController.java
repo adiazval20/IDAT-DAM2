@@ -35,7 +35,7 @@ public class InscripcionEventoVirtualController implements BaseController<Inscri
     }
 
     @PostMapping
-    public GenericResponse save(@RequestBody InscripcionEventoVirtualDTO dto) {
+    public GenericResponse saveDto(@RequestBody InscripcionEventoVirtualDTO dto) {
         return service.save(dto);
     }
 

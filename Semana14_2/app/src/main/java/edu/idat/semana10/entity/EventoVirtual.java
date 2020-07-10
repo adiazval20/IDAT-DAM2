@@ -5,7 +5,7 @@ import java.util.Date;
 public class EventoVirtual {
     private long id;
     private String nombre;
-    private String ponente;
+    private Persona ponente;
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
     private String url;
@@ -13,7 +13,7 @@ public class EventoVirtual {
     public EventoVirtual() {
     }
 
-    public EventoVirtual(long id, String nombre, String ponente, Date fechaHoraInicio, Date fechaHoraFin, String url) {
+    public EventoVirtual(long id, String nombre, Persona ponente, Date fechaHoraInicio, Date fechaHoraFin, String url) {
         this.id = id;
         this.nombre = nombre;
         this.ponente = ponente;
@@ -38,11 +38,11 @@ public class EventoVirtual {
         this.nombre = nombre;
     }
 
-    public String getPonente() {
+    public Persona getPonente() {
         return ponente;
     }
 
-    public void setPonente(String ponente) {
+    public void setPonente(Persona ponente) {
         this.ponente = ponente;
     }
 

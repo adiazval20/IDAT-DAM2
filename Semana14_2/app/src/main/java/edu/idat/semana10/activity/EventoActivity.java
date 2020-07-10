@@ -1,6 +1,7 @@
 package edu.idat.semana10.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,12 +17,15 @@ import java.text.SimpleDateFormat;
 import edu.idat.semana10.R;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.dto.EventoVirtualDTO;
+import edu.idat.semana10.dto.InscripcionEventoVirtualDTO;
+import edu.idat.semana10.entity.InscripcionEventoVirtual;
 import edu.idat.semana10.viewmodel.EventoViewModel;
 
 public class EventoActivity extends AppCompatActivity {
     private EventoViewModel viewModel;
     private TextView txtNombreEvento, txtNombrePonente, txtHorario;
     private Button btnCancel, btnInscribirse;
+    private long eventoVirtualId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +37,9 @@ public class EventoActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(EventoViewModel.class);
 
         Bundle data = getIntent().getExtras();
-        long id = (data != null) ? data.getLong("id") : 0;
+        eventoVirtualId = (data != null) ? data.getLong("id") : 0;
 
-        viewModel.find(id).observe(this, new Observer<GenericResponse<EventoVirtualDTO>>() {
+        viewModel.find(eventoVirtualId).observe(this, new Observer<GenericResponse<EventoVirtualDTO>>() {
             @Override
             public void onChanged(GenericResponse<EventoVirtualDTO> response) {
                 if (response != null) {
@@ -68,6 +72,8 @@ public class EventoActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
+        LifecycleOwner lifecycleOwner = this;
+
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +84,19 @@ public class EventoActivity extends AppCompatActivity {
         btnInscribirse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InscripcionEventoVirtualDTO dto = new InscripcionEventoVirtualDTO();
+                dto.setRequiereCertificado(true);
+                dto.setPersonaId(1);
+                dto.setEventoVirtualId(eventoVirtualId);
 
+                viewModel.inscribir(dto).observe(lifecycleOwner, new Observer<GenericResponse<InscripcionEventoVirtual>>() {
+                    @Override
+                    public void onChanged(GenericResponse<InscripcionEventoVirtual> response) {
+                        if (response != null) {
+                            Toast.makeText(EventoActivity.this, String.valueOf((int) response.getBody().getId()), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

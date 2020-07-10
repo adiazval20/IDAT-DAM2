@@ -2,6 +2,7 @@ package edu.idat.semana10.api;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
+import edu.idat.semana10.entity.InscripcionEventoVirtual;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -11,6 +12,7 @@ public class ConfigApi {
     private static Retrofit retrofit;
     private static UsuarioApi usuarioApi;
     private static EventoVirtualApi eventoVirtualApi;
+    private static InscripcionEventoVirtualApi inscripcionEventoVirtualApi;
 
     static {
         String baseUrl = "http://10.0.2.2:9090"; //IP DESDE EL EMULADOR
@@ -49,5 +51,12 @@ public class ConfigApi {
             eventoVirtualApi = retrofit.create(EventoVirtualApi.class);
         }
         return eventoVirtualApi;
+    }
+
+    public static InscripcionEventoVirtualApi getInscripcionEventoVirtualApi() {
+        if (inscripcionEventoVirtualApi == null) {
+            inscripcionEventoVirtualApi = retrofit.create(InscripcionEventoVirtualApi.class);
+        }
+        return inscripcionEventoVirtualApi;
     }
 }

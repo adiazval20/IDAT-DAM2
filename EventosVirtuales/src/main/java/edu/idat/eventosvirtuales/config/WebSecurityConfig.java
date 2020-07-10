@@ -13,9 +13,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http.csrf().disable()
-//                .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .authorizeRequests()
+        http.csrf().disable()
+                .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .authorizeRequests()
+                .anyRequest().permitAll();
 //                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
 //                .antMatchers(HttpMethod.POST, "/api/usuario/persona").permitAll()
 //                .antMatchers(HttpMethod.POST, "/api/usuario/auth").permitAll()
