@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -84,9 +87,15 @@ public class EventoActivity extends AppCompatActivity {
         btnInscribirse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences((Context) lifecycleOwner);
+                long personaId = preferences.getLong("personaId", 0);
+                if (personaId == 0) {
+                    return;
+                }
+
                 InscripcionEventoVirtualDTO dto = new InscripcionEventoVirtualDTO();
                 dto.setRequiereCertificado(true);
-                dto.setPersonaId(1);
+                dto.setPersonaId(personaId);
                 dto.setEventoVirtualId(eventoVirtualId);
 
                 viewModel.inscribir(dto).observe(lifecycleOwner, new Observer<GenericResponse<InscripcionEventoVirtual>>() {

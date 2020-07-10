@@ -1,5 +1,7 @@
 package edu.idat.semana10.api;
 
+import java.util.HashMap;
+
 import edu.idat.semana10.dto.UsuarioPersonaDTO;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -12,7 +14,7 @@ public interface UsuarioApi {
 
     @FormUrlEncoded
     @POST(path + "auth")
-    Call<GenericResponse> auth(@Field("username") String username, @Field("password") String password);
+    Call<GenericResponse<HashMap<String, Object>>> auth(@Field("username") String username, @Field("password") String password);
 
     @POST(path + "persona")
     Call<GenericResponse> register(@Body UsuarioPersonaDTO dto);

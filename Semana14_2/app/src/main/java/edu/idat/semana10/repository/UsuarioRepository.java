@@ -3,6 +3,8 @@ package edu.idat.semana10.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.HashMap;
+
 import edu.idat.semana10.api.ConfigApi;
 import edu.idat.semana10.api.GenericResponse;
 import edu.idat.semana10.api.UsuarioApi;
@@ -26,19 +28,26 @@ public class UsuarioRepository {
         api = ConfigApi.getUsuarioApi();
     }
 
-    public LiveData<GenericResponse> auth(String username, String password) {
-        final MutableLiveData<GenericResponse> data = new MutableLiveData<>();
+    public LiveData<GenericResponse<HashMap<String, Object>>> auth(String username, String password) {
+        final MutableLiveData<GenericResponse<HashMap<String, Object>>> data = new MutableLiveData<>();
 
-        api.auth(username, password).enqueue(new Callback<GenericResponse>() {
+        api.auth(username, password).enqueue(new Callback<GenericResponse<HashMap<String, Object>>>() {
             @Override
-            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+            public void onResponse(Call<GenericResponse<HashMap<String, Object>>> call, Response<GenericResponse<HashMap<String, Object>>> response) {
                 if (response.isSuccessful()) {
                     data.setValue(response.body());
+
+                    int rpta = response.body().getRpta();
+                    if (rpta == 1) {
+                        HashMap<String, Object> body = response.body().getBody();
+                        String token = (String) body.get("token");
+                        ConfigApi.setToken(token);
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<GenericResponse> call, Throwable t) {
+            public void onFailure(Call<GenericResponse<HashMap<String, Object>>> call, Throwable t) {
                 data.setValue(null);
             }
         });
