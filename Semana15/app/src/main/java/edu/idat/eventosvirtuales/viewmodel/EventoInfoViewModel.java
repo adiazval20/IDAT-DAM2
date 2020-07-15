@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.ArrayList;
+
 import edu.idat.eventosvirtuales.api.GenericResponse;
 import edu.idat.eventosvirtuales.dto.EventoVirtualDTO;
 import edu.idat.eventosvirtuales.entity.EventoVirtual;
@@ -35,4 +37,6 @@ public class EventoInfoViewModel extends AndroidViewModel {
     public LiveData<GenericResponse<InscripcionEventoVirtualDTO>> findByEventoPersona(long eventoVirtualId, long personaId) {
         return inscEviRepo.findByEventoPersona(eventoVirtualId, personaId);
     }
+
+
 }

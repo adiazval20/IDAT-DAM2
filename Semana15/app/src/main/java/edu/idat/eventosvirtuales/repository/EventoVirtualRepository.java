@@ -68,4 +68,24 @@ public class EventoVirtualRepository {
 
         return data;
     }
+
+    public LiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> listProximosByPersonaInscrita(long personaId) {
+        MutableLiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> data = new MutableLiveData<>();
+
+        api.listProximosByPersonaInscrita(personaId).enqueue(new Callback<GenericResponse<ArrayList<EventoVirtualDTO>>>() {
+            @Override
+            public void onResponse(Call<GenericResponse<ArrayList<EventoVirtualDTO>>> call, Response<GenericResponse<ArrayList<EventoVirtualDTO>>> response) {
+                if (response.isSuccessful()) {
+                    data.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse<ArrayList<EventoVirtualDTO>>> call, Throwable t) {
+                data.setValue(null);
+            }
+        });
+
+        return data;
+    }
 }

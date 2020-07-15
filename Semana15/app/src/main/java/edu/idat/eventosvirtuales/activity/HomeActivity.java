@@ -39,6 +39,8 @@ public class HomeActivity extends AppCompatActivity implements HomeCommunication
         initListeners();
 
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
+        
     }
 
     private void initViews() {

@@ -1,6 +1,7 @@
 package edu.idat.eventosvirtuales.api;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.idat.eventosvirtuales.dto.EventoVirtualDTO;
 import edu.idat.eventosvirtuales.entity.EventoVirtual;
@@ -16,4 +17,7 @@ public interface EventoVirtualApi {
 
     @GET(prefix + "/{id}")
     Call<GenericResponse<EventoVirtualDTO>> find(@Path("id") long id);
+
+    @GET(prefix + "/inscripcion-persona/proximos/{personaId}")
+    Call<GenericResponse<ArrayList<EventoVirtualDTO>>> listProximosByPersonaInscrita(@Path("personaId") long personaId);
 }

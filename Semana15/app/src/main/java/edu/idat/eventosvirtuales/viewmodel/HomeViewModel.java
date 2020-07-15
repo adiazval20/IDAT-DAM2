@@ -24,4 +24,8 @@ public class HomeViewModel extends AndroidViewModel {
     public LiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> listProximos() {
         return eviRepo.listProximos();
     }
+
+    public LiveData<GenericResponse<ArrayList<EventoVirtualDTO>>> listProximosByPersonaInscrita(long personaId) {
+        return eviRepo.listProximosByPersonaInscrita(personaId);
+    }
 }

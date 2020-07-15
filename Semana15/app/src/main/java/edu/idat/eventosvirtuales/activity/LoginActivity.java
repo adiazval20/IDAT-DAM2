@@ -78,6 +78,10 @@ public class LoginActivity extends AppCompatActivity implements LoginCommunicati
                     e.printStackTrace();
                 }
 
+                if (response == null) {
+                    return;
+                }
+
                 if (response.getRpta() == 1) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
                     SharedPreferences.Editor editor = preferences.edit();
