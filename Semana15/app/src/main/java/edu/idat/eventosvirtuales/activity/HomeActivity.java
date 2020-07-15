@@ -6,18 +6,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+
 import edu.idat.eventosvirtuales.R;
+import edu.idat.eventosvirtuales.api.GenericResponse;
+import edu.idat.eventosvirtuales.dto.EventoVirtualDTO;
 import edu.idat.eventosvirtuales.fragment.EventosFragment;
 import edu.idat.eventosvirtuales.fragment.HomeFragment;
 import edu.idat.eventosvirtuales.viewmodel.HomeViewModel;
@@ -25,6 +33,7 @@ import edu.idat.eventosvirtuales.viewmodel.HomeViewModel;
 public class HomeActivity extends AppCompatActivity implements HomeCommunication {
     private HomeViewModel viewModel;
     private BottomNavigationView bnvMenu;
+    private long personaId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,18 @@ public class HomeActivity extends AppCompatActivity implements HomeCommunication
 
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
-        
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        personaId = preferences.getLong("personaId", 0);
+
+        viewModel.listProximosByPersonaInscrita(personaId).observe(this, new Observer<GenericResponse<ArrayList<EventoVirtualDTO>>>() {
+            @Override
+            public void onChanged(GenericResponse<ArrayList<EventoVirtualDTO>> response) {
+                if (response != null) {
+                    Toast.makeText(HomeActivity.this, String.valueOf(response.getBody().size()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private void initViews() {
