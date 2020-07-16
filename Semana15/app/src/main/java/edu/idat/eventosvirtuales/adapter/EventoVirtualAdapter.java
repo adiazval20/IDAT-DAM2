@@ -17,11 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.idat.eventosvirtuales.EventoInfoActivity;
+import edu.idat.eventosvirtuales.activity.EventoInfoActivity;
 import edu.idat.eventosvirtuales.R;
 import edu.idat.eventosvirtuales.activity.HomeCommunication;
 import edu.idat.eventosvirtuales.dto.EventoVirtualDTO;
-import edu.idat.eventosvirtuales.entity.EventoVirtual;
 
 public class EventoVirtualAdapter extends ArrayAdapter<EventoVirtualDTO> {
     private HomeCommunication communication;

@@ -1,4 +1,4 @@
-package edu.idat.eventosvirtuales;
+package edu.idat.eventosvirtuales.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -18,6 +18,7 @@ import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
+import edu.idat.eventosvirtuales.R;
 import edu.idat.eventosvirtuales.api.ConfigApi;
 import edu.idat.eventosvirtuales.api.DocumentoAlmacenadoApi;
 import edu.idat.eventosvirtuales.api.EventoVirtualApi;
